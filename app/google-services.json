@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "554197408278",
+    "firebase_url": "https://all4learn.firebaseio.com",
+    "project_id": "all4learn",
+    "storage_bucket": "all4learn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554197408278:android:32779920b960b1f1c83337",
+        "android_client_info": {
+          "package_name": "com.example.all4learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554197408278-vto6thtedbe5vi80qt1e08hd4adkotpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqvaNZmHEqSxqLdqJxujj_0DC-AFhRJ1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554197408278-vto6thtedbe5vi80qt1e08hd4adkotpj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
