@@ -3,7 +3,7 @@ package com.example.all4learn.firebaseManagement;
 public class FirebaseFireStoreNotesCreate {
     private static FirebaseFireStoreNotesCreate instance;
 
-    private FirebaseFireStoreNotesCreate dao;
+    private FirebaseNotesManagement dao;
 
     public static FirebaseFireStoreNotesCreate getInstance() {
         if (instance == null) {
@@ -13,9 +13,9 @@ public class FirebaseFireStoreNotesCreate {
     }
 
     //todo what the fuck
-    public FirebaseFireStoreNotesCreate getDao() {
+    public FirebaseNotesManagement getDao() {
         if (dao == null) {
-            dao = new FirebaseFireStoreNotesCreate();
+            dao = new FirebaseNotesManagement();
         }
         return dao;
     }
