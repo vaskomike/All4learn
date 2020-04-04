@@ -14,17 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.all4learn.R;
+import com.google.firebase.firestore.util.Listener;
 
 import java.util.Date;
 import java.util.List;
 
 
-public class ActivityNotes extends AppCompatActivity {
+public class ActivityNotes extends AppCompatActivity implements ActivityLoadNotes.Listener, OnItemClickListener<Note> {
 
 
     private static final int REQUEST_CODE_ADD_NOTE = 1;
 
-    private ActivityLoadNotes notesPresenter = new ActivityLoadNotes(this);
+    private ActivityLoadNotes loadNotes = new ActivityLoadNotes(this);
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -41,11 +42,11 @@ public class ActivityNotes extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        adapter = new NotesAdapter(getLayoutInflater(), this);
+        adapter = new NotesAdapter(getLayoutInflater(), this::onItemClicked);
 
         refreshLayout = findViewById(R.id.swipeRefresh);
         refreshLayout.setRefreshing(true);
-        refreshLayout.setOnRefreshListener(notesPresenter::loadNotes);
+        refreshLayout.setOnRefreshListener(loadNotes::loadNotes);
 
         RecyclerView recyclerView = findViewById(R.id.notes);
         recyclerView.setAdapter(adapter);
@@ -63,7 +64,7 @@ public class ActivityNotes extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_CODE_ADD_NOTE) {
             if (resultCode == Activity.RESULT_OK) {
-                notesPresenter.loadNotes();
+                loadNotes.loadNotes();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -77,7 +78,7 @@ public class ActivityNotes extends AppCompatActivity {
 
     @Override
     public void onItemClicked(Note item) {
-        Toast.makeText(this, item.getText(), Toast.LENGTH_SHORT).show();
+
     }
 
 }

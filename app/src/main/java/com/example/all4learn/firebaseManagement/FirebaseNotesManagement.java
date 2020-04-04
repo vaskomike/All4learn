@@ -92,27 +92,11 @@ public class FirebaseNotesManagement implements NotesOperations {
         return firebaseAuth.getCurrentUser().getUid();
     }
 
-    @Override
-    public Note addNote(String title, String text, Date date) {
-
-        DocumentReference reference = firebaseFirestore.collection(FireStoreNoteMapper.COLLECTION).document();
-        reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, date));
-        return new Note(reference.getId(), title, text, date);
-    }
-
-    @Override
-    public Note loadNote(String title, String text, Date date) {
-
-        loadNote.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    return loadNote.;
-                } else {
-                    ;
-                }
-            }
-
-        });
-    }
+//    @Override
+//    public Note addNote(String title, String text, Date date) {
+//
+//        DocumentReference reference = firebaseFirestore.collection(FireStoreNoteMapper.COLLECTION).document();
+//        reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, date));
+//        return new Note(reference.getId(), title, text, date);
+//    }
 }

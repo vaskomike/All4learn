@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="monospace"
+            android:hint="@string/DefaultTitle"
+
+            android:paddingStart="6sp"
+            android:paddingEnd="6sp"
+            android:textSize="24sp"
+            app:counterEnabled="true"
+            app:counterMaxLength="5"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:hint="@string/DefaultNote"
+            android:inputType="textMultiLine"
+            android:paddingStart="6sp"
+            android:paddingEnd="6sp"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            tools:text="@tools:sample/lorem/random" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/dateNote"
+        android:layout_width="64dp"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+
+        android:layout_weight="1" />
+
+</LinearLayout>

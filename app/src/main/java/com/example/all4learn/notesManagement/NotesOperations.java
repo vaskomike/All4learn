@@ -14,9 +14,6 @@ public interface NotesOperations {
 
     void deleteNote(Note note);
 
-    Note addNote(String title, String text, Date date);
-
-    Note loadNote(String title, String text, Date date);
 
     interface GetNotesListener {
 
