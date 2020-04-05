@@ -74,7 +74,7 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
     @Override
     public void onItemClicked(Note item) {
-
+// todo loadnotes
     }
 
 }
