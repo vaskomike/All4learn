@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FireStoreNoteMapper {
-    public static final String COLLECTION = "Notes";
+    public static final String COLLECTION = "notes";
 
     public static final String TITLE = "title";
 
