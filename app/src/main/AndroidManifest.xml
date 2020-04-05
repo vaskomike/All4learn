@@ -21,7 +21,7 @@
             android:name=".notesManagement.ActivityNotes"
             android:windowSoftInputMode="adjustResize" />
 
-
+        <activity android:name=".notesManagement.ActivityAddNote" />
     </application>
 
 </manifest>

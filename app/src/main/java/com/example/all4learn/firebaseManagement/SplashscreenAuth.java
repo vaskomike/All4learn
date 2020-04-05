@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SplashscreenAuth extends AppCompatActivity {
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private static final long DELAY_MS = 1000;
 
