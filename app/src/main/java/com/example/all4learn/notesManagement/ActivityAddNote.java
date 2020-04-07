@@ -25,7 +25,7 @@ import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.TITLE
 public class ActivityAddNote extends AppCompatActivity {
 
     private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
-    private TextView dateNote;
+    private static TextView dateNote;
 
     private TextInputEditText titleInputEditText, textInputEditText;
 
@@ -45,7 +45,7 @@ public class ActivityAddNote extends AppCompatActivity {
 
     String endDate = format.format(calendar.getTime());
 
-    private void saveNote() {
+    public void saveNote() {
         Map<String, Object> addData = new HashMap<>();
         String title = titleInputEditText.getText().toString();
         String text = textInputEditText.getText().toString();
