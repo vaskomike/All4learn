@@ -1,15 +1,10 @@
 package com.example.all4learn.firebaseManagement;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import com.example.all4learn.notesManagement.Note;
 import com.example.all4learn.notesManagement.NotesOperations;
 import com.example.all4learn.notesManagement.SchedulersHandler;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -18,13 +13,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FirebaseNotesManagement implements NotesOperations {
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-
-    private DocumentReference loadNote = firebaseFirestore.collection("notes").document();
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -91,12 +83,4 @@ public class FirebaseNotesManagement implements NotesOperations {
     private String getUid() {
         return firebaseAuth.getCurrentUser().getUid();
     }
-
-//    @Override
-//    public Note addNote(String title, String text, Date date) {
-//
-//        DocumentReference reference = firebaseFirestore.collection(FireStoreNoteMapper.COLLECTION).document();
-//        reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, date));
-//        return new Note(reference.getId(), title, text, date);
-//    }
 }

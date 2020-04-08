@@ -25,6 +25,7 @@ import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.TITLE
 public class ActivityAddNote extends AppCompatActivity {
 
     private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+
     private static TextView dateNote;
 
     private TextInputEditText titleInputEditText, textInputEditText;
@@ -41,7 +42,7 @@ public class ActivityAddNote extends AppCompatActivity {
     }
 
     Calendar calendar = Calendar.getInstance();
-    static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    static final SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
 
     String endDate = format.format(calendar.getTime());
 
@@ -57,6 +58,7 @@ public class ActivityAddNote extends AppCompatActivity {
         } else Toast.makeText(ActivityAddNote.this, "Empty note", Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -71,4 +73,8 @@ public class ActivityAddNote extends AppCompatActivity {
         //todo load note
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
