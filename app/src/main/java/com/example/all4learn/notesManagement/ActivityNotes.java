@@ -32,6 +32,7 @@ import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.TITLE
 
 public class ActivityNotes extends AppCompatActivity implements ActivityLoadNotes.Listener, OnItemClickListener<Note> {
 
+    //todo load notes on this screen
 
     private static final int REQUEST_CODE_ADD_NOTE = 1;
 
