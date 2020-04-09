@@ -41,7 +41,6 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
     private NotesAdapter adapter;
 
-    NotesAdapter.NoteViewHolder viewHolder;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, ActivityNotes.class);
@@ -61,7 +60,7 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
         RecyclerView recyclerView = findViewById(R.id.notes);
         recyclerView.setAdapter(adapter);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
 

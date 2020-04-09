@@ -3,7 +3,6 @@ package com.example.all4learn.notesManagement;
 import com.google.firebase.firestore.ListenerRegistration;
 
 import java.lang.ref.WeakReference;
-import java.util.Date;
 import java.util.List;
 
 public interface NotesOperations {
