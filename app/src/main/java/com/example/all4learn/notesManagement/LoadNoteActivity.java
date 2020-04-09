@@ -36,7 +36,6 @@ public class LoadNoteActivity extends AppCompatActivity {
         titleInputEditText = findViewById(R.id.title);
         textInputEditText = findViewById(R.id.text);
         dateNote = findViewById(R.id.dateNote);
-        loadNote(item);
     }
 
     public void loadNote(Note note) {

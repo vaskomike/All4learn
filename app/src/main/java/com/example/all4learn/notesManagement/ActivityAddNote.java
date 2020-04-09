@@ -24,6 +24,7 @@ import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.TITLE
 
 public class ActivityAddNote extends AppCompatActivity {
 
+
     private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
 
     private static TextView dateNote;
@@ -70,7 +71,6 @@ public class ActivityAddNote extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        //todo load note
     }
 
     @Override

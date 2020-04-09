@@ -14,7 +14,6 @@ public class FirebaseFireStoreNotesCreate {
         return instance;
     }
 
-    //todo what the fuck
     public NotesOperations getDao() {
         if (dao == null) {
             dao = new FirebaseNotesManagement();

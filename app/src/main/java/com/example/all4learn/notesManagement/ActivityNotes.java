@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.all4learn.R;
@@ -40,6 +41,8 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
     private NotesAdapter adapter;
 
+    NotesAdapter.NoteViewHolder viewHolder;
+
     public static Intent createIntent(Context context) {
         return new Intent(context, ActivityNotes.class);
     }
@@ -50,7 +53,6 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
         setContentView(R.layout.activity_main);
 
-
         adapter = new NotesAdapter(getLayoutInflater(), this);
 
         refreshLayout = findViewById(R.id.swipeRefresh);
@@ -59,9 +61,9 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
         RecyclerView recyclerView = findViewById(R.id.notes);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        );
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
 
 
         findViewById(R.id.addNote).setOnClickListener(v -> {
@@ -92,16 +94,15 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
     private TextInputEditText titleInputEditText, textInputEditText;
 
-
     @Override
     public void onItemClicked(Note item) {
-// todo loadnotes
         setContentView(R.layout.activity_open_note2);
 
         titleInputEditText = findViewById(R.id.title);
         textInputEditText = findViewById(R.id.text);
         dateNote = findViewById(R.id.dateNote);
         loadNote(item);
+
     }
 
     public void loadNote(Note note) {
@@ -125,4 +126,5 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
             }
         });
     }
+
 }
