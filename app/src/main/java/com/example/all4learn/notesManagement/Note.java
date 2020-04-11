@@ -1,19 +1,21 @@
 package com.example.all4learn.notesManagement;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class Note {
     private final String id;
 
+    private final String ownerId;
+
     private final String title;
 
     private final String text;
 
-    private final Date timestamp;
+    private final String timestamp;
 
-    public Note(String id, String title, String text, Date timestamp) {
+    public Note(String id, String ownerId, String title, String text, String timestamp) {
         this.id = id;
+        this.ownerId = ownerId;
         this.title = title;
         this.text = text;
         this.timestamp = timestamp;
@@ -24,6 +26,10 @@ public class Note {
         return id;
     }
 
+    public String getOwnerId() {
+        return ownerId;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -32,7 +38,7 @@ public class Note {
         return text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return timestamp;
     }
 

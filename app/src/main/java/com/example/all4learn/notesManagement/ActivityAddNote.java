@@ -3,29 +3,27 @@ package com.example.all4learn.notesManagement;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.all4learn.R;
+import com.example.all4learn.firebaseManagement.FireStoreNoteMapper;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.COLLECTION;
-import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.DATE;
-import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.TEXT;
-import static com.example.all4learn.firebaseManagement.FireStoreNoteMapper.TITLE;
 
 public class ActivityAddNote extends AppCompatActivity {
 
 
     private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
 
     private static TextView dateNote;
 
@@ -39,31 +37,38 @@ public class ActivityAddNote extends AppCompatActivity {
         titleInputEditText = findViewById(R.id.title);
         textInputEditText = findViewById(R.id.text);
         dateNote = findViewById(R.id.dateNote);
-        dateNote.setText(endDate);
+        dateNote.setText(noteDate);
+
+    }
+
+    private String getUid() {
+        return firebaseAuth.getCurrentUser().getUid();
     }
 
     Calendar calendar = Calendar.getInstance();
     static final SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
 
-    String endDate = format.format(calendar.getTime());
+    private String noteDate = format.format(calendar.getTime());
 
-    public void saveNote() {
-        Map<String, Object> addData = new HashMap<>();
-        String title = titleInputEditText.getText().toString();
-        String text = textInputEditText.getText().toString();
-        addData.put(DATE, endDate);
-        addData.put(TEXT, text);
-        addData.put(TITLE, title);
-        if (!title.equals("") || !text.equals("")) {
-            fireStore.collection(COLLECTION).document().set(addData);
-        } else Toast.makeText(ActivityAddNote.this, "Empty note", Toast.LENGTH_SHORT).show();
+    public Note saveNote(String title, String text, String date) {
+        //addNote
+        title = titleInputEditText.getText().toString();
+        text = textInputEditText.getText().toString();
+        DocumentReference reference = fireStore.collection(FireStoreNoteMapper.COLLECTION).document();
+        reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, noteDate));
+        return new Note(reference.getId(), getUid(), title, text, date);
+//        addData.put(DATE, endDate);
+//        addData.put(TEXT, text);
+//        addData.put(TITLE, title);
+//        if (!title.equals("") || !text.equals("")) {
+//
+//        } else  Toast.makeText(ActivityAddNote.this, "Empty note", Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     protected void onStop() {
         super.onStop();
-        saveNote();
+        saveNote(titleInputEditText.toString(), textInputEditText.toString(), noteDate);
         setResult(Activity.RESULT_OK);
         finish();
     }
