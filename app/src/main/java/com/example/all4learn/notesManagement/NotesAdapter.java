@@ -3,7 +3,6 @@ package com.example.all4learn.notesManagement;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -70,7 +69,7 @@ public class NotesAdapter extends ListAdapter<Note, NotesAdapter.NoteViewHolder>
             binded = note;
             tvTitle.setText(note.getTitle());
             tvDescription.setText(note.getText());
-            tvDate.setText(note.getText());
+            tvDate.setText(note.getDate());
 
         }
     }

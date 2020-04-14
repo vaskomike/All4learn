@@ -20,6 +20,7 @@ import com.example.all4learn.firebaseManagement.FireStoreNoteMapper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -65,7 +66,6 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
 
-
         findViewById(R.id.addNote).setOnClickListener(v -> {
             Intent intent = new Intent(this, ActivityAddNote.class);
             startActivity(intent);
@@ -93,15 +93,20 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
     private TextView dateNote;
 
     private TextInputEditText titleInputEditText, textInputEditText;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+    private String getUid() {
+        return firebaseAuth.getCurrentUser().getUid();
+    }
 
     @Override
-    public void onItemClicked(Note item) {
+    public Note onItemClicked(Note item) {
         setContentView(R.layout.activity_open_note2);
-
         titleInputEditText = findViewById(R.id.title);
         textInputEditText = findViewById(R.id.text);
         dateNote = findViewById(R.id.dateNote);
         loadNote(item);
+        return new Note(item.getId(), getUid(), TITLE, TEXT, dateNote.toString());
 
     }
 
@@ -115,7 +120,6 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
                             titleInputEditText.setText(documentSnapshot.getString(TITLE));
                             textInputEditText.setText(documentSnapshot.getString(TEXT));
                             dateNote.setText(documentSnapshot.getString(DATE));
-
                         } else
                             Toast.makeText(ActivityNotes.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                     }

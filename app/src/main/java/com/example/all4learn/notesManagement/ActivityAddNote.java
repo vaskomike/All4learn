@@ -3,6 +3,7 @@ package com.example.all4learn.notesManagement;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,15 +55,15 @@ public class ActivityAddNote extends AppCompatActivity {
         //addNote
         title = titleInputEditText.getText().toString();
         text = textInputEditText.getText().toString();
-        DocumentReference reference = fireStore.collection(FireStoreNoteMapper.COLLECTION).document();
-        reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, noteDate));
-        return new Note(reference.getId(), getUid(), title, text, date);
 //        addData.put(DATE, endDate);
 //        addData.put(TEXT, text);
 //        addData.put(TITLE, title);
-//        if (!title.equals("") || !text.equals("")) {
-//
-//        } else  Toast.makeText(ActivityAddNote.this, "Empty note", Toast.LENGTH_SHORT).show();
+        if (!title.equals("") || !text.equals("")) {
+            DocumentReference reference = fireStore.collection(FireStoreNoteMapper.COLLECTION).document();
+            reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, noteDate));
+            return new Note(reference.getId(), getUid(), title, text, date);
+        } else Toast.makeText(ActivityAddNote.this, "Empty note", Toast.LENGTH_SHORT).show();
+        return null;
     }
 
     @Override

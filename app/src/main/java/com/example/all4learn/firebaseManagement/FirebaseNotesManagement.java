@@ -22,7 +22,7 @@ public class FirebaseNotesManagement implements NotesOperations {
 
     @Override
     public void getNotes(WeakReference<NotesOperations.GetNotesListener> listenerRef) {
-        Task<QuerySnapshot> snapshotTask = getUserNotesQuery().get();
+        Task<QuerySnapshot> snapshotTask = getUserNotesQuery().orderBy("date", Query.Direction.DESCENDING).get();//todo sort
 
         snapshotTask.addOnSuccessListener(SchedulersHandler.getIo(), queryDocumentSnapshots -> {
             List<Note> notes = parseNotes(queryDocumentSnapshots.getDocuments());
