@@ -47,7 +47,7 @@ public class ActivityAddNote extends AppCompatActivity {
     }
 
     Calendar calendar = Calendar.getInstance();
-    static final SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
+    static final SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm:yy");
 
     private String noteDate = format.format(calendar.getTime());
 

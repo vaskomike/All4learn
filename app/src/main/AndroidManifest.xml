@@ -22,7 +22,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".notesManagement.ActivityAddNote" />
-        <activity android:name=".notesManagement.LoadNoteActivity" />
+        <activity android:name=".notesManagement.EditNoteActivity" />
     </application>
 
 </manifest>

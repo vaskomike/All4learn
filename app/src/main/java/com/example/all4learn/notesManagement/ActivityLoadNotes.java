@@ -28,7 +28,7 @@ public class ActivityLoadNotes extends BasePresenter<ActivityLoadNotes.Listener>
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void stopLoadNotes() {
-        registration = notesDao.listenNotes(new WeakReference<>(this));
+        registration.remove();
     }
 
     @Override

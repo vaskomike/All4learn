@@ -1,8 +1,25 @@
 package com.example.all4learn.notesManagement;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
-public class Note {
+public class Note implements Parcelable {
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
+
+
     private final String id;
 
     private final String ownerId;
@@ -13,6 +30,7 @@ public class Note {
 
     private final String timestamp;
 
+
     public Note(String id, String ownerId, String title, String text, String timestamp) {
         this.id = id;
         this.ownerId = ownerId;
@@ -21,6 +39,14 @@ public class Note {
         this.timestamp = timestamp;
     }
 
+
+    protected Note(Parcel in) {
+        id = in.readString();
+        ownerId = in.readString();
+        title = in.readString();
+        text = in.readString();
+        timestamp = in.readString();
+    }
 
     public String getId() {
         return id;
@@ -56,5 +82,19 @@ public class Note {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, text, timestamp);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(ownerId);
+        dest.writeString(title);
+        dest.writeString(text);
+        dest.writeString(timestamp);
     }
 }
