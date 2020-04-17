@@ -4,15 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.all4learn.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -45,6 +45,7 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
 
         RecyclerView recyclerView = findViewById(R.id.notes);
         recyclerView.setAdapter(adapter);
+        new ItemTouchHelper(callback).attachToRecyclerView(recyclerView);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
@@ -60,14 +61,18 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
         adapter.submitList(notes);
     }
 
-    private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
 
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
-    private String getUid() {
-        return firebaseAuth.getCurrentUser().getUid();
-    }
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     @Override
     public void onItemClicked(Note item) {
