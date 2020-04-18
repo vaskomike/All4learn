@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">All4learn</string>
     <string name="error_msg">Note was not saved</string>
-    <string name="DefaultNote">New note</string>
+    <string name="DefaultNote">Note</string>
     <string name="DefaultTitle">Title</string>
 </resources>

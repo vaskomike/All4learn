@@ -47,17 +47,15 @@ public class ActivityAddNote extends AppCompatActivity {
     }
 
     Calendar calendar = Calendar.getInstance();
-    static final SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm:yy");
+    static final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy HH:mm");
 
     private String noteDate = format.format(calendar.getTime());
 
     public Note saveNote(String title, String text, String date) {
-        //addNote
+
         title = titleInputEditText.getText().toString();
         text = textInputEditText.getText().toString();
-//        addData.put(DATE, endDate);
-//        addData.put(TEXT, text);
-//        addData.put(TITLE, title);
+
         if (!title.equals("") || !text.equals("")) {
             DocumentReference reference = fireStore.collection(FireStoreNoteMapper.COLLECTION).document();
             reference.set(FireStoreNoteMapper.newNote(getUid(), title, text, noteDate));

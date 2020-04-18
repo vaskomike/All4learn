@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.all4learn.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,14 +34,9 @@ public class EditNoteActivity extends AppCompatActivity {
 
     private TextInputEditText titleInputEditText, textInputEditText;
 
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
-
-    DocumentReference reference;
-
-    private String getUid() {
-        return firebaseAuth.getCurrentUser().getUid();
-    }
+    Calendar calendar = Calendar.getInstance();
+    static final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy HH:mm");
+    private String noteDate = format.format(calendar.getTime());
 
     public static Intent createIntent(Context context, Note item) {
         Intent intent = new Intent(context, EditNoteActivity.class);
@@ -73,8 +68,12 @@ public class EditNoteActivity extends AppCompatActivity {
         data.put(TEXT, textInputEditText.getText().toString());
         data.put(DATE, dateNote.getText());
         edit.set(
-                data,
-                SetOptions.merge()
+                data
         );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }
