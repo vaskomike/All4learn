@@ -3,13 +3,11 @@ package com.example.all4learn.firebaseManagement;
 import com.example.all4learn.notesManagement.Note;
 import com.example.all4learn.notesManagement.NotesOperations;
 import com.example.all4learn.notesManagement.SchedulersHandler;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,26 +17,6 @@ public class FirebaseNotesManagement implements NotesOperations {
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
-    @Override
-    public void getNotes(WeakReference<NotesOperations.GetNotesListener> listenerRef) {
-        Task<QuerySnapshot> snapshotTask = getUserNotesQuery().orderBy("date", Query.Direction.DESCENDING).get();//todo sort
-
-        snapshotTask.addOnSuccessListener(SchedulersHandler.getIo(), queryDocumentSnapshots -> {
-            List<Note> notes = parseNotes(queryDocumentSnapshots.getDocuments());
-            NotesOperations.GetNotesListener listener = listenerRef.get();
-            if (listener != null) {
-                listener.onNotesLoaded(notes);
-            }
-        });
-
-        snapshotTask.addOnFailureListener(e -> {
-            NotesOperations.GetNotesListener listener = listenerRef.get();
-            if (listener != null) {
-                listener.onNotesLoadFailed();
-            }
-        });
-    }
 
     @Override
     public ListenerRegistration listenNotes(WeakReference<NotesOperations.GetNotesListener> listenerRef) {

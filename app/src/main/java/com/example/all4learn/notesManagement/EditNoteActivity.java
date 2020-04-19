@@ -1,5 +1,6 @@
 package com.example.all4learn.notesManagement;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,19 +62,38 @@ public class EditNoteActivity extends AppCompatActivity {
         titleInputEditText.setText(note.getTitle());
         textInputEditText.setText(note.getText());
         dateNote.setText(note.getDate());
-
-        DocumentReference edit = fireStore.collection(COLLECTION).document(note.getId());
-        Map<String, Object> data = new HashMap<>();
-        data.put(TITLE, titleInputEditText.getText().toString());
-        data.put(TEXT, textInputEditText.getText().toString());
-        data.put(DATE, dateNote.getText());
-        edit.set(
-                data
-        );
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        Note note = getIntent().getParcelableExtra(EXTRA_NOTE);
+        if (note == null) {
+            finish();
+            return;
+        }
+
+        DocumentReference edit = fireStore.collection(COLLECTION).document(note.getId());
+        Map<String, Object> data = new HashMap<>();
+
+        if (note.getTitle().equals(titleInputEditText.getText().toString()) && note.getText().equals(textInputEditText.getText().toString())) {
+            finish();
+            return;
+        }
+
+        if (!note.getTitle().equals(titleInputEditText.getText().toString())) {
+            data.put(TITLE, titleInputEditText.getText().toString());
+        }
+
+        if (!note.getText().equals(textInputEditText.getText().toString())) {
+            data.put(TEXT, textInputEditText.getText().toString());
+        }
+
+        data.put(DATE, noteDate);
+        edit.set(
+                data
+        );
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 }

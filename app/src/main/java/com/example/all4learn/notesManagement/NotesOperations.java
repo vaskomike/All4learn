@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface NotesOperations {
 
-    void getNotes(WeakReference<GetNotesListener> listener);
 
     ListenerRegistration listenNotes(WeakReference<GetNotesListener> listener);
 
