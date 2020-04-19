@@ -13,6 +13,7 @@ import com.example.all4learn.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -76,11 +77,6 @@ public class EditNoteActivity extends AppCompatActivity {
         DocumentReference edit = fireStore.collection(COLLECTION).document(note.getId());
         Map<String, Object> data = new HashMap<>();
 
-        if (note.getTitle().equals(titleInputEditText.getText().toString()) && note.getText().equals(textInputEditText.getText().toString())) {
-            finish();
-            return;
-        }
-
         if (!note.getTitle().equals(titleInputEditText.getText().toString())) {
             data.put(TITLE, titleInputEditText.getText().toString());
         }
@@ -88,10 +84,17 @@ public class EditNoteActivity extends AppCompatActivity {
         if (!note.getText().equals(textInputEditText.getText().toString())) {
             data.put(TEXT, textInputEditText.getText().toString());
         }
+        data.put(DATE, dateNote);
+
+        if (note.getTitle().equals(titleInputEditText.getText().toString()) && note.getText().equals(textInputEditText.getText().toString())) {
+            data.put(DATE, note.getDate());
+            finish();
+        }
 
         data.put(DATE, noteDate);
         edit.set(
-                data
+                data,
+                SetOptions.merge()
         );
         setResult(Activity.RESULT_OK);
         finish();

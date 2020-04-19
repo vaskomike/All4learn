@@ -71,14 +71,4 @@ public class ActivityAddNote extends AppCompatActivity {
         setResult(Activity.RESULT_OK);
         finish();
     }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }

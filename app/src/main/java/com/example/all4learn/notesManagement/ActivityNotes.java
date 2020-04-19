@@ -19,14 +19,6 @@ import java.util.List;
 
 public class ActivityNotes extends AppCompatActivity implements ActivityLoadNotes.Listener, OnItemClickListener<Note> {
 
-    //todo load notes on this screen
-
-    private static final int REQUEST_CODE_ADD_NOTE = 1;
-
-    private ActivityLoadNotes loadNotes = new ActivityLoadNotes(this);
-
-
-
     private NotesAdapter adapter;
 
 
@@ -41,7 +33,6 @@ public class ActivityNotes extends AppCompatActivity implements ActivityLoadNote
         setContentView(R.layout.activity_main);
 
         adapter = new NotesAdapter(getLayoutInflater(), this);
-
 
         RecyclerView recyclerView = findViewById(R.id.notes);
         recyclerView.setAdapter(adapter);
